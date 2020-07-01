@@ -19,5 +19,10 @@
   "bugs": {
     "url": "https://github.com/Elbie-em/JavaScript-Tic-Tac-Toe-Game/issues"
   },
-  "homepage": "https://github.com/Elbie-em/JavaScript-Tic-Tac-Toe-Game#readme"
+  "homepage": "https://github.com/Elbie-em/JavaScript-Tic-Tac-Toe-Game#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2"
+  }
 }
