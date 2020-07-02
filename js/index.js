@@ -1,23 +1,3 @@
-const playerDisplayer = (players) => ({
-  displayPlayer: () => console.log('');
-});
-
-barker({name: 'karo'}).bark();
-
-const game = (players) => {
-  let state = {
-    name,
-    speed: 100,
-    position: 0
-  }
-
-  return Object.assign(
-    {},
-    barker(state),
-    driver(state)
-  );
-}
-
 let gameBoard = ['','','','','','','','',''];
 
 const Game = (players) => {
@@ -28,11 +8,14 @@ const Game = (players) => {
     displayPlayerTurn(currentPlayer);
   }
 
-  // const selectCell = () => {
-  //   console.log(this);
-  //   this.innerHTML = 'X'; //currentPlayer.symbol;
-  //   changePlayerTurn();
-  // }
+  const selectCell = () => {
+    let id = (event.target.id);
+    el = document.getElementById(id)
+    el.innerHTML = currentPlayer.symbol;
+    gameBoard[id[3]] = el.innerHTML
+    console.log(gameBoard);
+    changePlayerTurn();
+  }
 
   const changePlayerTurn = () => {
     currentPlayer = currentPlayer.id == 1 ? players[1] : players[0];
@@ -44,12 +27,12 @@ const Game = (players) => {
     playerTurnLabel.innerHTML = `${currentPlayer.name}'s turn`;
   }
 
-  // const assignCells = () => {
-  //   for(let i = 0; i < gameBoard.length; i++) {
-  //     let cell = document.getElementById(`pos${i}`);
-  //     cell.onclick = selectCell.bind(cell);
-  //   }
-  // }
+  const assignCells = () => {
+    for(let i = 0; i < gameBoard.length; i++) {
+      let cell = document.getElementById(`pos${i}`);
+      cell.onclick = selectCell.bind(cell);
+    }
+  }
 
   return { start, players, selectCell, currentPlayer, changePlayerTurn };
 }
@@ -81,9 +64,6 @@ const initGame = () => {
   // repeat if none of the conditions to finish are met
 }
 
-
-window.onload = function() {
-function selectCell(cell) {
+const selectCell = (cell) => {
   cell.innerHTML = 'X';
 }
-};
