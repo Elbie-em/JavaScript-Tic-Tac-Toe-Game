@@ -1,28 +1,60 @@
+const playerDisplayer = (players) => ({
+  displayPlayer: () => console.log('');
+});
+
+barker({name: 'karo'}).bark();
+
+const game = (players) => {
+  let state = {
+    name,
+    speed: 100,
+    position: 0
+  }
+
+  return Object.assign(
+    {},
+    barker(state),
+    driver(state)
+  );
+}
+
 let gameBoard = ['','','','','','','','',''];
 
 const Game = (players) => {
-  let currentUser = players[0];
+  let currentPlayer = players[0];
 
-  const selectCell = () => {
-    this.innerHTML = 'X';
+  const start = () => {
+    assignCells();
+    displayPlayerTurn(currentPlayer);
   }
 
-  const changeUserTurn = () => {
-    currentUser = currentUser.id == 1 ? players[1] : players[0];
+  // const selectCell = () => {
+  //   console.log(this);
+  //   this.innerHTML = 'X'; //currentPlayer.symbol;
+  //   changePlayerTurn();
+  // }
+
+  const changePlayerTurn = () => {
+    currentPlayer = currentPlayer.id == 1 ? players[1] : players[0];
+    displayPlayerTurn(currentPlayer);
   }
 
-  return { players, selectCell, changeUserTurn };
-}
-
-const printBoard = () => {
-  for(let i = 0; i < gameBoard.length; i++) {
-    let cell = document.getElementById(`pos${i}`);
-    cell.onclick = selectCell.bind(cell);
+  const displayPlayerTurn = (currentPlayer) => {
+    let playerTurnLabel = document.getElementById("player-turn-label");
+    playerTurnLabel.innerHTML = `${currentPlayer.name}'s turn`;
   }
+
+  // const assignCells = () => {
+  //   for(let i = 0; i < gameBoard.length; i++) {
+  //     let cell = document.getElementById(`pos${i}`);
+  //     cell.onclick = selectCell.bind(cell);
+  //   }
+  // }
+
+  return { start, players, selectCell, currentPlayer, changePlayerTurn };
 }
 
 const initGame = () => {
-
   // instantiate players
   const player1Name = document.getElementById("player-one").value;
   const player2Name = document.getElementById("player-two").value;
@@ -42,19 +74,16 @@ const initGame = () => {
     cells[i].disabled = false;
   }
 
-  // ask player 1 to play
-  let playerTurnLabel = document.getElementById("player-turn-label");
-  playerTurnLabel.innerHTML = `${player1.name}'s turn`;
+  game.start();
   // check if the player has won display as winner if won
   // ask player 2 to play if player 1 didn t win display as winner if won
   // if board if full set draw
   // repeat if none of the conditions to finish are met
 }
 
-const render = () => {
-  printBoard();
-}
 
-window.onload = () => {
-  render();
+window.onload = function() {
+function selectCell(cell) {
+  cell.innerHTML = 'X';
 }
+};
