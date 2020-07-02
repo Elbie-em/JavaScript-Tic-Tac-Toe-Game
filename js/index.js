@@ -13,7 +13,7 @@ const Game = (players) => {
     el = document.getElementById(id)
     el.innerHTML = currentPlayer.symbol;
     gameBoard[id[3]] = el.innerHTML
-    console.log(gameBoard);
+    el.disabled = true;
     changePlayerTurn();
   }
 
