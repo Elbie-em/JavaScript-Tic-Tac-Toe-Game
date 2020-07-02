@@ -1,0 +1,12 @@
+.cell {
+  width: 100px;
+  height: 100px;
+  font-size: 50px;
+  border: 1px solid #e2e2e2;
+  margin: -4px;
+  cursor: pointer;
+}
+
+.cell:focus {
+  outline: 0;
+}
