@@ -1,3 +1,8 @@
+window.onload = () => {
+  let board = document.getElementById("board");
+  board.hidden = true;
+}
+
 let gameBoard = ['','','','','','','','',''];
 
 const Game = (players) => {
@@ -51,6 +56,7 @@ const initGame = () => {
   // hide players form
   let playersForm = document.getElementById("players-form");
   playersForm.hidden = true;
+  board.hidden = false;
   let cells = document.getElementsByClassName("cell");
   // enable the board
   for(let i = 0; i < cells.length; i++) {
@@ -64,6 +70,3 @@ const initGame = () => {
   // repeat if none of the conditions to finish are met
 }
 
-const selectCell = (cell) => {
-  cell.innerHTML = 'X';
-}
