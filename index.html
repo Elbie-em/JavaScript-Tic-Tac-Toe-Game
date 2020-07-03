@@ -19,16 +19,16 @@
         <form action="">
           <div class="form-group">
             <label for="player-one">Player One</label>
-            <input id="player-one" type="text" class="form-control w-75 mx-auto" placeholder="Enter player one's name">
+            <input id="player-one" type="text" required class="form-control w-75 mx-auto" placeholder="Enter player one's name">
           </div>
           <div class="form-group">
             <label for="player-two">Player Two</label>
-            <input id="player-two" type="text" class="form-control w-75 mx-auto" placeholder="Enter player two's name">
+            <input id="player-two" type="text" required class="form-control w-75 mx-auto" placeholder="Enter player two's name">
           </div>
-          <button class="btn btn-success mb-3" onclick="initGame()" type="button">Start Game</button>
+          <button id="start-game" class="btn btn-success mb-3" type="button">Start Game</button>
         </form>
       </div>
-      <div><p id="player-turn-label"></p></div>
+      <div><p id="message"></p></div>
       <div id="board" class="mx-auto">
         <div class="d-flex flex-row justify-content-center">
           <button id="pos0" class="cell" disabled></button>

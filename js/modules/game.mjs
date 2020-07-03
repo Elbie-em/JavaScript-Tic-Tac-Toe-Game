@@ -5,7 +5,7 @@ const Game = (players) => {
   let numberCellsSelected = 0;
 
   const hidePlayerTurn = () => {
-    const playerTurnLabel = document.getElementById('player-turn-label');
+    const playerTurnLabel = document.getElementById('message');
     playerTurnLabel.hidden = true;
   };
 
@@ -56,7 +56,8 @@ const Game = (players) => {
   };
 
   const displayPlayerTurn = (currentPlayer) => {
-    const playerTurnLabel = document.getElementById('player-turn-label');
+    const playerTurnLabel = document.getElementById('message');
+    playerTurnLabel.className = 'text-dark';
     playerTurnLabel.innerHTML = `${currentPlayer.name}'s turn`;
   };
 
