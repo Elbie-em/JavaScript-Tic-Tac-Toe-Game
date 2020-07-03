@@ -1,17 +1,8 @@
-import { Game } from './modules/game.mjs';
-
-window.onload = () => {
-  const startBtn = document.getElementById('start-game');
-  startBtn.onclick = initGame;
-  const board = document.getElementById('board');
-  board.hidden = true;
-};
+import { Game } from './modules/game.js'; // eslint-disable-line import/extensions
 
 const Player = (id, name, symbol) => ({ id, name, symbol });
 
 const displayError = (player1, player2) => {
-  const errors = [];
-
   const resetClass = 'w-75 mx-auto form-control border border-secondary';
   const p1Input = document.getElementById('player-one');
   p1Input.className = resetClass;
@@ -44,6 +35,11 @@ const displayError = (player1, player2) => {
   }
 };
 
+const displayboard = () => {
+  const board = document.getElementById('board');
+  board.hidden = !board.hidden;
+};
+
 const initGame = () => { // eslint-disable-line no-unused-vars
   const player1Name = document.getElementById('player-one').value;
   const player2Name = document.getElementById('player-two').value;
@@ -64,7 +60,7 @@ const initGame = () => { // eslint-disable-line no-unused-vars
 
     const playersForm = document.getElementById('players-form');
     playersForm.hidden = true;
-    board.hidden = false;
+    displayboard();
     const cells = document.getElementsByClassName('cell');
 
     for (let i = 0; i < cells.length; i += 1) {
@@ -73,4 +69,11 @@ const initGame = () => { // eslint-disable-line no-unused-vars
 
     game.start();
   }
+};
+
+
+window.onload = () => {
+  const startBtn = document.getElementById('start-game');
+  startBtn.onclick = initGame;
+  displayboard();
 };

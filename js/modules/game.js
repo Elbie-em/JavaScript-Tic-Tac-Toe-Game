@@ -94,4 +94,4 @@ const Game = (players) => {
   };
 };
 
-export { Game };
+export { Game }; // eslint-disable-line import/prefer-default-export
