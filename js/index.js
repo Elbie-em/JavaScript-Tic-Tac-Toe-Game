@@ -33,18 +33,11 @@ const Game = (players) => {
       if(val == 'O') p2_moves.push(idx);
     });
 
-    // winning_combinations.forEach((value) => {
     for(let i = 0; i < winning_combinations.length; i++) {
       const reg = new RegExp(winning_combinations[i].join(".*"));
       let winnerResult = document.getElementById("game-result");
-      console.log("==========================================");
-      console.log(`reg: ${reg}`);
-      console.log(`p1_moves: ${p1_moves.join("")}`);
-      console.log(reg.test(p1_moves.join("")));
-
 
       if(reg.test(p1_moves.join(""))) {
-        console.log("enter");
         winnerResult.innerHTML = `${players[0].name} has won`;
         disableButtons();
         break;
@@ -62,9 +55,9 @@ const Game = (players) => {
 
   const selectCell = () => {
     let id = (event.target.id);
-    el = document.getElementById(id)
+    el = document.getElementById(id);
     el.innerHTML = currentPlayer.symbol;
-    gameBoard[id[3]] = el.innerHTML
+    gameBoard[id[3]] = el.innerHTML;
     number_cells_selected++;
     el.disabled = true;
     checkWinner();
@@ -90,11 +83,11 @@ const Game = (players) => {
 
   const disableButtons = () => {
     let cells = document.getElementsByClassName("cell");
-    // enable the board
     for(let i = 0; i < cells.length; i++) {
       cells[i].disabled = true;
     }    
   }
+
   return { start, players, selectCell, currentPlayer, changePlayerTurn };
 }
 
@@ -102,7 +95,7 @@ const initGame = () => {
   // instantiate players
   const player1Name = document.getElementById("player-one").value;
   const player2Name = document.getElementById("player-two").value;
-  
+
   const player1 = {id: 1, name: player1Name, symbol: 'X'};
   const player2 = {id: 2, name: player2Name, symbol: 'O'};
   const players = [player1, player2];
