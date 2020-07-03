@@ -25,7 +25,7 @@
 
 ## Live Demo
 
-[Live Demo Link](https://rawcdn.githack.com/Elbie-em/JavaScript-Tic-Tac-Toe-Game/feature/structure/index.html)
+[Live Demo Link](https://vibrant-kilby-38d43d.netlify.app/)
 
 
 ## Requirements
