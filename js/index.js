@@ -33,31 +33,27 @@ const Game = (players) => {
       if(val == 'O') p2_moves.push(idx);
     });
 
-    // winning_combinations.forEach((value) => {
     for(let i = 0; i < winning_combinations.length; i++) {
       const reg = new RegExp(winning_combinations[i].join(".*"));
       let winnerResult = document.getElementById("game-result");
-      console.log("==========================================");
-      console.log(`reg: ${reg}`);
-      console.log(`p1_moves: ${p1_moves.join("")}`);
-      console.log(reg.test(p1_moves.join("")));
-
-
+  
       if(reg.test(p1_moves.join(""))) {
-        console.log("enter");
         winnerResult.innerHTML = `${players[0].name} has won`;
         disableButtons();
+        hidePlayerTurn();
         break;
       }
       else if (reg.test(p2_moves.join(""))) {
         winnerResult.innerHTML = `${players[1].name} has won`;
         disableButtons();
+        hidePlayerTurn();
         break;
       }
       else if(number_cells_selected == 9) {
         winnerResult.innerHTML = "It's a draw";
+        hidePlayerTurn();
       }
-    };
+    }
   }
 
   const selectCell = () => {
@@ -81,6 +77,11 @@ const Game = (players) => {
     playerTurnLabel.innerHTML = `${currentPlayer.name}'s turn`;
   }
 
+  const hidePlayerTurn = () => {
+    let playerTurnLabel = document.getElementById("player-turn-label");
+    playerTurnLabel.hidden = true;
+  }
+
   const assignCells = () => {
     for(let i = 0; i < gameBoard.length; i++) {
       let cell = document.getElementById(`pos${i}`);
@@ -90,7 +91,6 @@ const Game = (players) => {
 
   const disableButtons = () => {
     let cells = document.getElementsByClassName("cell");
-    // enable the board
     for(let i = 0; i < cells.length; i++) {
       cells[i].disabled = true;
     }    
@@ -98,50 +98,29 @@ const Game = (players) => {
   return { start, players, selectCell, currentPlayer, changePlayerTurn };
 }
 
+const Player = (id,name,symbol) => {
+  return {id,name,symbol}
+}
+
 const initGame = () => {
-  // instantiate players
   const player1Name = document.getElementById("player-one").value;
   const player2Name = document.getElementById("player-two").value;
   
-  const player1 = {id: 1, name: player1Name, symbol: 'X'};
-  const player2 = {id: 2, name: player2Name, symbol: 'O'};
+  const player1 = Player(1,player1Name,'X');
+  const player2 =  Player(2,player2Name,'O');
+
   const players = [player1, player2];
 
   let game = Game(players);
 
-  // hide players form
   let playersForm = document.getElementById("players-form");
   playersForm.hidden = true;
   board.hidden = false;
   let cells = document.getElementsByClassName("cell");
-  // enable the board
+
   for(let i = 0; i < cells.length; i++) {
     cells[i].disabled = false;
   }
 
   game.start();
-  // check if the player has won display as winner if won
-  // ask player 2 to play if player 1 didn t win display as winner if won
-  // if board if full set draw
-  // repeat if none of the conditions to finish are met
 }
-
-
-//////////////////////////////////////////////////////////
-// let board = ['X', 'X', 'X', 'O', 'O', 'O', 'X', 'X', 'X'];
-
-// for(let i = 0; i < 3; i++) {
-//   // [0, 1, 2, 3, 4, 5, 6, 7, 8]
-//   const row = board.slice(i * 3, (i * 3) + 3);
-//   const winner = [...new Set(row)].length == 1 ? true : false;
-//   console.log(row);
-//   console.log(winner);
-// }
-
-// let diagonals = [0, 1, 2].reduce((acc, idx) => {
-//   acc[0].push(board[idx * 4]);
-//   acc[1].push(board[idx * 2 + 2]);
-//   return acc;
-// }, [[],[]]);
-
-// console.log(diagonals);
