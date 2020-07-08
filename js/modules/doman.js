@@ -20,9 +20,14 @@ const disableButtons = () => {
   }
 };
 
-const showWinner = (player) => {
+const showWinner = (player = null) => {
   const winnerResult = document.getElementById('game-result');
-  winnerResult.innerHTML = `${player} has won`;
+
+  if(player) {
+    winnerResult.innerHTML = `${player} has won`;
+  } else {
+    winnerResult.innerHTML = "It's a draw";
+  }
 }
 
 const displayPlayerTurn = (currentPlayer) => {
@@ -32,4 +37,24 @@ const displayPlayerTurn = (currentPlayer) => {
   msgEl.innerHTML = `${currentPlayer.name}'s turn`;
 };
 
-export { assignStartBtn, displayBoard, hidePlayerTurn, displayPlayerTurn };
+const displayError = (error) => {
+  let msgEl = document.getElementById("messages");
+  msgEl.innerHTML = "";
+  const resetClass = 'w-75 mx-auto form-control border border-secondary';
+  const inputError = 'w-75 mx-auto form-control border border-danger';
+  let msgs = [];
+
+  for(let i = 0; i < error.messages.length; i += 1) {
+    let input = document.getElementById(error.messages[i].input);
+    input.className = inputError;
+    let li = document.createElement('li');
+    li.className = 'list-group-item border border-0';
+    li.innerHTML = error.messages[i].msg;
+    msgEl.appendChild(li);
+  }
+
+  const msgError = 'text-danger';
+  msgEl.classList.add(msgError);
+};
+
+export { assignStartBtn, disableButtons, displayBoard, hidePlayerTurn, displayPlayerTurn, showWinner, displayError };

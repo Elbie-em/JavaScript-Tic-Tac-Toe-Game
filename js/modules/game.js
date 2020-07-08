@@ -5,13 +5,6 @@ const Game = (players) => {
   let currentPlayer = players[0];
   let numberCellsSelected = 0;
 
-  const disableButtons = () => {
-    const cells = document.getElementsByClassName('cell');
-    for (let i = 0; i < cells.length; i += 1) {
-      cells[i].disabled = true;
-    }
-  };
-
   const checkWinner = () => {
     const p1Moves = [];
     const p2Moves = [];
@@ -32,20 +25,19 @@ const Game = (players) => {
 
     for (let i = 0; i < winningCombinations.length; i += 1) {
       const reg = new RegExp(winningCombinations[i].join('.*'));
-      const winnerResult = document.getElementById('game-result');
 
       if (reg.test(p1Moves.join(''))) {
-        winnerResult.innerHTML = `${players[0].name} has won`;
-        disableButtons();
+        Doman.showWinner(players[0].name);
+        Doman.disableButtons();
         Doman.hidePlayerTurn();
         break;
       } else if (reg.test(p2Moves.join(''))) {
-        winnerResult.innerHTML = `${players[1].name} has won`;
-        disableButtons();
+        Doman.showWinner(players[1].name);
+        Doman.disableButtons();
         Doman.hidePlayerTurn();
         break;
       } else if (numberCellsSelected === 9) {
-        winnerResult.innerHTML = "It's a draw";
+        Doman.showWinner();
         Doman.hidePlayerTurn();
       }
     }
@@ -56,13 +48,21 @@ const Game = (players) => {
     Doman.displayPlayerTurn(currentPlayer);
   };
 
-  const selectCell = () => {
-    const { id } = event.target; // eslint-disable-line no-restricted-globals
+  const pasteSymbol = (id, currentPlayer) => {
     const el = document.getElementById(id);
     el.innerHTML = currentPlayer.symbol;
-    gameBoard[id[3]] = el.innerHTML;
+    return currentPlayer.symbol;
+  }
+
+  const selectCell = () => {
+    const { id } = event.target; // eslint-disable-line no-restricted-globals
+    // let cell = event.target;
+    // const el = document.getElementById(id);
+    cell.innerHTML = currentPlayer.symbol;
+    // gameBoard[cell.id[3]] = cell.innerHTML;
+    gameBoard[id[3]] = pasteSymbol(id, currentPlayer);
     numberCellsSelected += 1;
-    el.disabled = true;
+    cell.disabled = true;
     checkWinner();
     changePlayerTurn();
   };
