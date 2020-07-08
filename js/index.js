@@ -35,16 +35,26 @@ const displayError = (player1, player2) => {
   }
 };
 
+const checkPlayersNames = (player1Name, player2Name) => {
+  let errors = [];
+  let code = 0;
+
+  if (player1 === '') {
+    errors.push({player: 1, msg: 'Please, enter valid name for player1'});
+  }
+
+  if (player2 === '') {
+    errors.push({player: 2, msg: 'Please, enter valid name for player2'});
+  }
+  return errors;
+}
+
 const initGame = () => { // eslint-disable-line no-unused-vars
   const player1Name = document.getElementById('player-one').value;
   const player2Name = document.getElementById('player-two').value;
 
-  if (player1Name === '' || player2Name === '') {
-    displayError(player1Name, player2Name);
-  } else if (player1Name === player2Name) {
-    const msgEl = document.getElementById('message');
-    msgEl.innerHTML = 'Player names must be unique!';
-    msgEl.className = 'text-danger';
+  const result = checkPlayersNames(player1Name, player2Name);
+
   } else {
     const player1 = Player(1, player1Name, 'X');
     const player2 = Player(2, player2Name, 'O');
