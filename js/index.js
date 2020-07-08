@@ -2,51 +2,47 @@ import * as Doman from './modules/doman.js';
 import { Game } from './modules/game.js';
 import Player from './modules/player.js';
 
-const displayError = (player1, player2) => {
+const displayError = (error) => {
+  let msgEl = document.getElementById("messages");
+  msgEl.innerHTML = "";
   const resetClass = 'w-75 mx-auto form-control border border-secondary';
-  const p1Input = document.getElementById('player-one');
-  p1Input.className = resetClass;
-  const p2Input = document.getElementById('player-two');
-  p2Input.className = resetClass;
-
   const inputError = 'w-75 mx-auto form-control border border-danger';
-  let msg = 'Please, enter valid ';
+  let msgs = [];
+  // input.className = resetClass;
 
-  if (player1 === '') {
-    msg += ' name for player1';
-    p1Input.className = inputError;
+  for(let i = 0; i < error.messages.length; i += 1) {
+    let input = document.getElementById(error.messages[i].input);
+    input.className = inputError;
+    let li = document.createElement('li');
+    li.className = 'list-group-item border border-0';
+    li.innerHTML = error.messages[i].msg;
+    msgEl.appendChild(li);
   }
 
-  if (player2 === '') {
-    msg += ' name for player2';
-
-    p2Input.className = inputError;
-  }
-
-  if (player1 === '' && player2 === '') {
-    msg = 'Please, enter valid user names';
-  }
-
-  if (msg !== 'Please, enter valid ') {
-    const msgEl = document.getElementById('message');
-    const msgError = 'text-danger';
-    msgEl.innerHTML = msg;
-    msgEl.classList.add(msgError);
-  }
+  const msgError = 'text-danger';
+  msgEl.classList.add(msgError);
 };
 
 const checkPlayersNames = (player1Name, player2Name) => {
-  let errors = [];
+  let messages = [];
   let code = 0;
 
-  if (player1 === '') {
-    errors.push({player: 1, msg: 'Please, enter valid name for player1'});
+  if (player1Name === '') {
+    messages.push({input: 'player-one', msg: 'Please, enter valid name for player1'});
+    code = -1;
   }
 
-  if (player2 === '') {
-    errors.push({player: 2, msg: 'Please, enter valid name for player2'});
+  if (player2Name === '') {
+    messages.push({input: 'player-two', msg: 'Please, enter valid name for player2'});
+    code = -1;
   }
-  return errors;
+
+  if (player1Name === player2Name && player1Name !== '') {
+    messages.push({input: 'player-two', msg: 'Names must be unique'});
+    code = -1;
+  }
+
+  return {code, messages};
 }
 
 const initGame = () => { // eslint-disable-line no-unused-vars
@@ -55,6 +51,8 @@ const initGame = () => { // eslint-disable-line no-unused-vars
 
   const result = checkPlayersNames(player1Name, player2Name);
 
+  if(result.code) {
+    displayError(result);
   } else {
     const player1 = Player(1, player1Name, 'X');
     const player2 = Player(2, player2Name, 'O');

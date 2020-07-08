@@ -26,9 +26,10 @@ const showWinner = (player) => {
 }
 
 const displayPlayerTurn = (currentPlayer) => {
-  const playerTurnLabel = document.getElementById('message');
-  playerTurnLabel.className = 'text-dark';
-  playerTurnLabel.innerHTML = `${currentPlayer.name}'s turn`;
+  const msgEl = document.getElementById('messages');
+  msgEl.innerHTML = '';
+  msgEl.className = 'text-dark';
+  msgEl.innerHTML = `${currentPlayer.name}'s turn`;
 };
 
-export { assignStartBtn, displayBoard, hidePlayerTurn };
+export { assignStartBtn, displayBoard, hidePlayerTurn, displayPlayerTurn };

@@ -51,15 +51,9 @@ const Game = (players) => {
     }
   };
 
-  const displayPlayerTurn = (currentPlayer) => {
-    const playerTurnLabel = document.getElementById('message');
-    playerTurnLabel.className = 'text-dark';
-    playerTurnLabel.innerHTML = `${currentPlayer.name}'s turn`;
-  };
-
   const changePlayerTurn = () => {
     currentPlayer = currentPlayer.id === 1 ? players[1] : players[0];
-    displayPlayerTurn(currentPlayer);
+    Doman.displayPlayerTurn(currentPlayer);
   };
 
   const selectCell = () => {
@@ -82,7 +76,7 @@ const Game = (players) => {
 
   const start = () => {
     assignCells();
-    displayPlayerTurn(currentPlayer);
+    Doman.displayPlayerTurn(currentPlayer);
   };
 
   return {
