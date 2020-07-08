@@ -1,5 +1,12 @@
-const doman = (() => {
-})();
+const assignStartBtn = (initGame) => {
+  const startBtn = document.getElementById('start-game');
+  startBtn.onclick = initGame;
+}
+
+const displayBoard = () => {
+  const board = document.getElementById('board');
+  board.hidden = !board.hidden;
+};
 
 const hidePlayerTurn = () => {
   const playerTurnLabel = document.getElementById('message');
@@ -23,3 +30,5 @@ const displayPlayerTurn = (currentPlayer) => {
   playerTurnLabel.className = 'text-dark';
   playerTurnLabel.innerHTML = `${currentPlayer.name}'s turn`;
 };
+
+export { assignStartBtn, displayBoard, hidePlayerTurn };

@@ -1,14 +1,9 @@
-
+import * as Doman from './doman.js';
 const gameBoard = ['', '', '', '', '', '', '', '', ''];
 
 const Game = (players) => {
   let currentPlayer = players[0];
   let numberCellsSelected = 0;
-
-  const hidePlayerTurn = () => {
-    const playerTurnLabel = document.getElementById('message');
-    playerTurnLabel.hidden = true;
-  };
 
   const disableButtons = () => {
     const cells = document.getElementsByClassName('cell');
@@ -42,16 +37,16 @@ const Game = (players) => {
       if (reg.test(p1Moves.join(''))) {
         winnerResult.innerHTML = `${players[0].name} has won`;
         disableButtons();
-        hidePlayerTurn();
+        Doman.hidePlayerTurn();
         break;
       } else if (reg.test(p2Moves.join(''))) {
         winnerResult.innerHTML = `${players[1].name} has won`;
         disableButtons();
-        hidePlayerTurn();
+        Doman.hidePlayerTurn();
         break;
       } else if (numberCellsSelected === 9) {
         winnerResult.innerHTML = "It's a draw";
-        hidePlayerTurn();
+        Doman.hidePlayerTurn();
       }
     }
   };

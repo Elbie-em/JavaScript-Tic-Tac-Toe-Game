@@ -1,6 +1,6 @@
-import { Game } from './modules/game.js'; // eslint-disable-line import/extensions
-
-const Player = (id, name, symbol) => ({ id, name, symbol });
+import * as Doman from './modules/doman.js';
+import { Game } from './modules/game.js';
+import Player from './modules/player.js';
 
 const displayError = (player1, player2) => {
   const resetClass = 'w-75 mx-auto form-control border border-secondary';
@@ -35,11 +35,6 @@ const displayError = (player1, player2) => {
   }
 };
 
-const displayboard = () => {
-  const board = document.getElementById('board');
-  board.hidden = !board.hidden;
-};
-
 const initGame = () => { // eslint-disable-line no-unused-vars
   const player1Name = document.getElementById('player-one').value;
   const player2Name = document.getElementById('player-two').value;
@@ -60,7 +55,7 @@ const initGame = () => { // eslint-disable-line no-unused-vars
 
     const playersForm = document.getElementById('players-form');
     playersForm.hidden = true;
-    displayboard();
+    Doman.displayBoard();
     const cells = document.getElementsByClassName('cell');
 
     for (let i = 0; i < cells.length; i += 1) {
@@ -71,9 +66,6 @@ const initGame = () => { // eslint-disable-line no-unused-vars
   }
 };
 
-
 window.onload = () => {
-  const startBtn = document.getElementById('start-game');
-  startBtn.onclick = initGame;
-  displayboard();
+  Doman.assignStartBtn(initGame);
 };
