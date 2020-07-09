@@ -51,7 +51,7 @@ const changePlayerTurn = () => {
   return currentPlayer;
 };
 
-const selectCell = (cellIdx) => {
+const selectCell = (cellIdx, currentPlayer) => {
   gameBoard[cellIdx] = currentPlayer.symbol;
   numberCellsSelected += 1;
 };

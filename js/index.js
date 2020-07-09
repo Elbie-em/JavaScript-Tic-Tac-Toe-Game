@@ -4,7 +4,7 @@ import Player from './modules/player.js';
 
 const selectCell = (cellIdx) => {
   const currentPlayer = Game.getCurrentPlayer();
-  Game.selectCell(cellIdx);
+  Game.selectCell(cellIdx, currentPlayer);
   Doman.updateCell(cellIdx, currentPlayer);
   const winner = Game.checkWinner();
 
@@ -14,7 +14,7 @@ const selectCell = (cellIdx) => {
     Doman.hidePlayerTurn();
   } else {
     Game.changePlayerTurn();
-    Doman.displayPlayerTurn(currentPlayer);
+    Doman.displayPlayerTurn(Game.getCurrentPlayer());
   }
 };
 
