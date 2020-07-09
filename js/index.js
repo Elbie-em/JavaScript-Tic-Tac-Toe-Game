@@ -9,11 +9,16 @@ const selectCell = (cellIdx) => {
   const winner = Game.checkWinner();
 
   if(winner) {
-    Doman.showWinner(winner);
+    Doman.showWinner(winner.name);
+    Doman.disableButtons();
+    return;
   } else if (Game.numberCellsSelected === 9) {
     Doman.showWinner();
+    Doman.disableButtons();
+    return;
   } else {
     Game.changePlayerTurn();
+    Doman.displayPlayerTurn(Game.currentPlayer);
   }
 }
 
@@ -31,6 +36,7 @@ const initGame = () => {
     Doman.hidePlayersForm();
     Doman.assignCells(selectCell);
     Game.start(players);
+    Doman.displayPlayerTurn(Game.currentPlayer);
     Doman.displayBoard();
     Doman.enableButtons();
   }

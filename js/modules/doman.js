@@ -83,8 +83,11 @@ const hidePlayersForm = () => {
   playersForm.hidden = true;
 }
 
-const updateCell = (cellIdx) => {
+const updateCell = (cellIdx, player) => {
   const cell = document.getElementById(`pos${cellIdx}`);
+  cell.innerHTML = player.symbol;
+  cell.disabled = true;
 }
 
-export { assignStartBtn, getPlayersNames, displayError, hidePlayersForm, assignCells, displayBoard, enableButtons, updateCell }
+export { assignStartBtn, getPlayersNames, displayError, hidePlayersForm, 
+  assignCells, displayBoard, enableButtons, updateCell, showWinner, displayPlayerTurn, disableButtons }

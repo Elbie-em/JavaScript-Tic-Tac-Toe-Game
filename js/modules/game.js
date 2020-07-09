@@ -16,13 +16,13 @@ const checkWinner = () => {
   let diag2 = [];
 
   for(let i = 0; i < 3; i += 1) {
-    const row = gameBoard.slice(i * 3, i * 3 + 2);
+    const row = gameBoard.slice(i * 3, i * 3 + 3);
     if(checkPlayers(row)) return winner = currentPlayer;
     const col = [gameBoard[i], gameBoard[i + 3], gameBoard[i + 6]];
     if(checkPlayers(col)) return winner = currentPlayer;
 
-    diag1.push(i * 4);
-    diag2.push(i * 2 + 2);
+    diag1.push(gameBoard[i * 4]);
+    diag2.push(gameBoard[i * 2 + 2]);
   }
 
   if(checkPlayers(diag1)) return winner = currentPlayer;
