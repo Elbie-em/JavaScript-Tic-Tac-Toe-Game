@@ -1,30 +1,28 @@
 import * as Doman from './modules/doman.js';
-import * as Game from './modules/game.js';
+import * as Game from './modules/game';
 import Player from './modules/player.js';
 
 const selectCell = (cellIdx) => {
-  const currentPlayer = Game.currentPlayer;
+  const currentPlayer = Game.getCurrentPlayer();
   Game.selectCell(cellIdx);
   Doman.updateCell(cellIdx, currentPlayer);
   const winner = Game.checkWinner();
 
-  if(winner) {
-    Doman.showWinner(winner.name);
+  if (winner || Game.getNumberCellsSelected() === 9) {
+    Doman.showWinner(winner);
     Doman.disableButtons();
-  } else if (Game.numberCellsSelected === 9) {
-    Doman.showWinner();
-    Doman.disableButtons();
+    Doman.hidePlayerTurn();
   } else {
     Game.changePlayerTurn();
-    Doman.displayPlayerTurn(Game.currentPlayer);
+    Doman.displayPlayerTurn(currentPlayer);
   }
-}
+};
 
 const initGame = () => {
   const playersNames = Doman.getPlayersNames();
   const result = Game.checkPlayersNames(playersNames);
 
-  if(result.errCode) {
+  if (result.errCode) {
     Doman.displayError(result);
   } else {
     const player1 = Player(1, playersNames.player1Name, 'X');
@@ -34,11 +32,11 @@ const initGame = () => {
     Doman.hidePlayersForm();
     Doman.assignCells(selectCell);
     Game.start(players);
-    Doman.displayPlayerTurn(Game.currentPlayer);
+    Doman.displayPlayerTurn(Game.getCurrentPlayer());
     Doman.displayBoard();
     Doman.enableButtons();
   }
-}
+};
 
 window.onload = () => {
   Doman.assignStartBtn(initGame);

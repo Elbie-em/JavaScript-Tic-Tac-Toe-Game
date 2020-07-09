@@ -25,12 +25,12 @@ const disableButtons = () => {
 const showWinner = (player = null) => {
   const winnerResult = document.getElementById('game-result');
 
-  if(player) {
-    winnerResult.innerHTML = `${player} has won`;
+  if (player) {
+    winnerResult.innerHTML = `${player.name} has won`;
   } else {
     winnerResult.innerHTML = "It's a draw";
   }
-}
+};
 
 const displayPlayerTurn = (currentPlayer) => {
   const msgEl = document.getElementById('messages');
@@ -40,16 +40,14 @@ const displayPlayerTurn = (currentPlayer) => {
 };
 
 const displayError = (error) => {
-  let msgEl = document.getElementById("messages");
-  msgEl.innerHTML = "";
-  const resetClass = 'w-75 mx-auto form-control border border-secondary';
+  const msgEl = document.getElementById('messages');
+  msgEl.innerHTML = '';
   const inputError = 'w-75 mx-auto form-control border border-danger';
-  let msgs = [];
 
-  for(let i = 0; i < error.messages.length; i += 1) {
-    let input = document.getElementById(error.messages[i].input);
+  for (let i = 0; i < error.messages.length; i += 1) {
+    const input = document.getElementById(error.messages[i].input);
     input.className = inputError;
-    let li = document.createElement('li');
+    const li = document.createElement('li');
     li.className = 'list-group-item border border-0';
     li.innerHTML = error.messages[i].msg;
     msgEl.appendChild(li);
@@ -69,25 +67,28 @@ const assignCells = (cellSelector) => {
 const assignStartBtn = (initGame) => {
   const startBtn = document.getElementById('start-game');
   startBtn.onclick = initGame;
-}
+};
 
 const getPlayersNames = () => {
   const player1Name = document.getElementById('player-one').value;
   const player2Name = document.getElementById('player-two').value;
 
   return { player1Name, player2Name };
-}
+};
 
 const hidePlayersForm = () => {
   const playersForm = document.getElementById('players-form');
   playersForm.hidden = true;
-}
+};
 
 const updateCell = (cellIdx, player) => {
   const cell = document.getElementById(`pos${cellIdx}`);
   cell.innerHTML = player.symbol;
   cell.disabled = true;
-}
+};
 
-export { assignStartBtn, getPlayersNames, displayError, hidePlayersForm, 
-  assignCells, displayBoard, enableButtons, updateCell, showWinner, displayPlayerTurn, disableButtons }
+export {
+  assignStartBtn, getPlayersNames, displayError, hidePlayersForm,
+  assignCells, displayBoard, enableButtons, updateCell, showWinner, displayPlayerTurn,
+  disableButtons, hidePlayerTurn,
+};
