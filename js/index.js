@@ -1,5 +1,5 @@
 import * as Doman from './modules/doman.js';
-import * as Game from './modules/game';
+import * as Game from './modules/game.js';
 import Player from './modules/player.js';
 
 const selectCell = (cellIdx) => {
