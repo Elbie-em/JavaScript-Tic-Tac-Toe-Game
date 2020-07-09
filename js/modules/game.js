@@ -2,44 +2,34 @@ let gameBoard = new Array(9);
 let players = [];
 let currentPlayer;
 let numberCellsSelected = 0;
+let winner;
 
-// const checkWinner = () => {
-//   const p1Moves = [];
-//   const p2Moves = [];
+const checkWinner = () => {
+  // we are just assuming that the current user is the winner we need to change that
+  const checkPlayers = (combination) => {
+    const unified = [...new Set(combination)];
 
-//   const winningCombinations = [[0, 1, 2],
-//     [3, 4, 5],
-//     [6, 7, 8],
-//     [0, 3, 6],
-//     [1, 4, 7],
-//     [2, 5, 8],
-//     [0, 4, 8],
-//     [2, 4, 6]];
+    return (unified.length === 1 && unified[0] !== "") ? unified[0] : false;
+  }
 
-//   gameBoard.forEach((val, idx) => {
-//     if (val === 'X') p1Moves.push(idx);
-//     if (val === 'O') p2Moves.push(idx);
-//   });
+  let diag1 = [];
+  let diag2 = [];
 
-//   for (let i = 0; i < winningCombinations.length; i += 1) {
-//     const reg = new RegExp(winningCombinations[i].join('.*'));
+  for(let i = 0; i < 3; i += 1) {
+    const row = gameBoard.slice(i * 3, i * 3 + 2);
+    if(checkPlayers(row)) return winner = currentPlayer;
+    const col = [gameBoard[i], gameBoard[i + 3], gameBoard[i + 6]];
+    if(checkPlayers(col)) return winner = currentPlayer;
 
-//     if (reg.test(p1Moves.join(''))) {
-//       Doman.showWinner(players[0].name);
-//       Doman.disableButtons();
-//       Doman.hidePlayerTurn();
-//       break;
-//     } else if (reg.test(p2Moves.join(''))) {
-//       Doman.showWinner(players[1].name);
-//       Doman.disableButtons();
-//       Doman.hidePlayerTurn();
-//       break;
-//     } else if (numberCellsSelected === 9) {
-//       Doman.showWinner();
-//       Doman.hidePlayerTurn();
-//     }
-//   }
-// };
+    diag1.push(i * 4);
+    diag2.push(i * 2 + 2);
+  }
+
+  if(checkPlayers(diag1)) return winner = currentPlayer;
+  if(checkPlayers(diag2)) return winner = currentPlayer;
+
+  return null;
+};
 
 const changePlayerTurn = () => {
   currentPlayer = currentPlayer.id === 1 ? players[1] : players[0];

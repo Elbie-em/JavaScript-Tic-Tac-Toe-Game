@@ -4,12 +4,12 @@ import Player from './modules/player.js';
 
 const selectCell = (cellIdx) => {
   const currentPlayer = Game.currentPlayer;
-  Doman.updateCell(cellIdx, currentPlayer);
   Game.selectCell(cellIdx);
+  Doman.updateCell(cellIdx, currentPlayer);
   const winner = Game.checkWinner();
 
   if(winner) {
-    Doman.showWinner(currentPlayer);
+    Doman.showWinner(winner);
   } else if (Game.numberCellsSelected === 9) {
     Doman.showWinner();
   } else {
