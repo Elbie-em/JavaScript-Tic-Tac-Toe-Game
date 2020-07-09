@@ -1,8 +1,3 @@
-const assignStartBtn = (initGame) => {
-  const startBtn = document.getElementById('start-game');
-  startBtn.onclick = initGame;
-}
-
 const displayBoard = () => {
   const board = document.getElementById('board');
   board.hidden = !board.hidden;
@@ -11,6 +6,13 @@ const displayBoard = () => {
 const hidePlayerTurn = () => {
   const playerTurnLabel = document.getElementById('message');
   playerTurnLabel.hidden = true;
+};
+
+const enableButtons = () => {
+  const cells = document.getElementsByClassName('cell');
+  for (let i = 0; i < cells.length; i += 1) {
+    cells[i].disabled = false;
+  }
 };
 
 const disableButtons = () => {
@@ -57,4 +59,32 @@ const displayError = (error) => {
   msgEl.classList.add(msgError);
 };
 
-export { assignStartBtn, disableButtons, displayBoard, hidePlayerTurn, displayPlayerTurn, showWinner, displayError };
+const assignCells = (cellSelector) => {
+  for (let i = 0; i < 9; i += 1) {
+    const cell = document.getElementById(`pos${i}`);
+    cell.onclick = () => cellSelector(i);
+  }
+};
+
+const assignStartBtn = (initGame) => {
+  const startBtn = document.getElementById('start-game');
+  startBtn.onclick = initGame;
+}
+
+const getPlayersNames = () => {
+  const player1Name = document.getElementById('player-one').value;
+  const player2Name = document.getElementById('player-two').value;
+
+  return { player1Name, player2Name };
+}
+
+const hidePlayersForm = () => {
+  const playersForm = document.getElementById('players-form');
+  playersForm.hidden = true;
+}
+
+const updateCell = (cellIdx) => {
+  const cell = document.getElementById(`pos${cellIdx}`);
+}
+
+export { assignStartBtn, getPlayersNames, displayError, hidePlayersForm, assignCells, displayBoard, enableButtons, updateCell }
