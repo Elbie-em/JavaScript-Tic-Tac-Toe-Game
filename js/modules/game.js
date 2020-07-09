@@ -5,7 +5,6 @@ let numberCellsSelected = 0;
 let winner;
 
 const checkWinner = () => {
-  // we are just assuming that the current user is the winner we need to change that
   const checkPlayers = (combination) => {
     const unified = [...new Set(combination)];
 

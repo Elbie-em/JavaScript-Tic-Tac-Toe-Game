@@ -11,11 +11,9 @@ const selectCell = (cellIdx) => {
   if(winner) {
     Doman.showWinner(winner.name);
     Doman.disableButtons();
-    return;
   } else if (Game.numberCellsSelected === 9) {
     Doman.showWinner();
     Doman.disableButtons();
-    return;
   } else {
     Game.changePlayerTurn();
     Doman.displayPlayerTurn(Game.currentPlayer);
