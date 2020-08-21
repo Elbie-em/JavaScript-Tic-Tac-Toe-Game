@@ -1,3 +1,11 @@
-const Player = (id, name, symbol) => ({ id, name, symbol });
+// function* generateId() {
+//   let i = 0;
+//   while(i < 1)
+//   yield i++;
+// }
 
-export default Player;
+// const Player = (name) => {
+//    const id: generateId, name, symbol
+//    );
+
+// export default Player;
