@@ -1,6 +1,7 @@
 import * as Doman from './modules/doman.js';
 import * as Game from './modules/game.js';
 import Player from './modules/player.js';
+import './css/styles.css';
 
 const selectCell = (cellIdx) => {
   const currentPlayer = Game.getCurrentPlayer();

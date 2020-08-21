@@ -4,7 +4,7 @@ const displayBoard = () => {
 };
 
 const hidePlayerTurn = () => {
-  const playerTurnLabel = document.getElementById('message');
+  const playerTurnLabel = document.getElementById('messages');
   playerTurnLabel.hidden = true;
 };
 
