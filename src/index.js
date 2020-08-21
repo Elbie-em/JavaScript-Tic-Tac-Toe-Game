@@ -21,21 +21,19 @@ const selectCell = (cellIdx) => {
 
 const initGame = () => {
   const playersNames = Doman.getPlayersNames();
-  const result = Game.checkPlayersNames(playersNames);
 
-  if (result.errCode) {
-    Doman.displayError(result);
-  } else {
-    const player1 = Player(1, playersNames.player1Name, 'X');
-    const player2 = Player(2, playersNames.player2Name, 'O');
-    const players = [player1, player2];
+  Game.addPlayer(playersNames.player1Name);
+  Game.addPlayer(playersNames.player2Name);
+  Game.start();
 
+  if(Game.started) {
     Doman.hidePlayersForm();
     Doman.assignCells(selectCell);
-    Game.start(players);
     Doman.displayPlayerTurn(Game.getCurrentPlayer());
     Doman.displayBoard();
     Doman.enableButtons();
+  } else {
+    Doman.displayError(Game.errors);
   }
 };
 

@@ -1,8 +1,40 @@
 const gameBoard = new Array(9);
-let players = [];
+let players = [{id: 1, name: 'First Player', symbol: 'X'},
+               {id: 2, name: 'Second Player', symbol: 'O'}];
 let currentPlayer;
 let numberCellsSelected = 0;
 let winner;
+
+const createPlayer = (playerName) => {
+  const result = validatePlayerName(name);
+
+  if(result.code) {
+    return {id, name, symbol};
+  }
+
+  return result;
+};
+
+const validatePlayer = (playerName) => {
+  const messages = [];
+  let code = 0;
+
+  if (playerName === '') {
+    messages.push({msg: 'Please, enter valid name for the player'});
+    code = -1;
+  }
+
+  if (players.any(player => player === playerName)) {
+    messages.push({msg: 'Names of the user was already taken'});
+    code = -1;
+  }
+
+  if (pla)
+  if(code === 0) players.push(playerName);
+
+  return { errCode, messages };
+};
+
 
 const getCurrentPlayer = () => currentPlayer;
 
@@ -46,7 +78,7 @@ const checkWinner = () => {
   return null;
 };
 
-const changePlayerTurn = () => {
+const changePlayerTurn = (player) => {
   currentPlayer = currentPlayer.id === 1 ? players[1] : players[0];
   return currentPlayer;
 };
