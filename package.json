@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Elbie-em/JavaScript-Tic-Tac-Toe-Game#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.11.0",
     "css-loader": "^4.2.1",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
