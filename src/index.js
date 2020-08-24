@@ -24,32 +24,17 @@ const initGame = () => {
 
   let validNames = Game.validatePlayersNames(playersNames);
 
-  // if (validName) {
-  //   Game.addPlayer(playerNames[0]);
-
-  //   validName = Game.validatePlayerName(playersNames[1]);
-
-  //   if (validName) {
-  //     Game.addPlayer(playersNames[1]);
-
-  //     const result = Game.checkPlayersNames(playersNames);
-
-  //     if (result.errCode) {
-  //       Doman.displayError(result);
-  //     } else {
-  //       const player1 = Player(1, playersNames.player1Name, 'X');
-  //       const player2 = Player(2, playersNames.player2Name, 'O');
-  //       const players = [player1, player2];
-
-  //       Doman.hidePlayersForm();
-  //       Doman.assignCells(selectCell);
-  //       Game.start(players);
-  //       Doman.displayPlayerTurn(Game.getCurrentPlayer());
-  //       Doman.displayBoard();
-  //       Doman.enableButtons();
-  //     }
-  //   }
-  // }
+  if (validNames.code === 0) {
+    Game.addPlayers(playersNames);
+    Doman.hidePlayersForm();
+    Doman.assignCells(selectCell);
+    Game.start();
+    Doman.displayPlayerTurn(Game.getCurrentPlayer());
+    Doman.displayBoard();
+    Doman.enableButtons();
+  } else {
+    Doman.displayError(validNames);
+  }
 };
 
 window.onload = () => {
