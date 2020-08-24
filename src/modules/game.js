@@ -4,17 +4,56 @@ let currentPlayer;
 let numberCellsSelected = 0;
 let winner;
 
+const isUnique = (arr) => !([...new Set(arr)].length == 1);
+const areNotEmpty = (arr) => !arr.some(v => !!!v);
+
+function* generateId() {
+  let i = 1;
+  while(i < 3)
+  yield i++;
+}
+
+const getBoard = () => gameBoard;
+
+const getPlayers = () => players;
+
+const validatePlayersNames = (playersNames) => {
+  let result;
+
+  switch(true) {
+    case !isUnique(playersNames):
+      result = {code: -1, message: "Names are not unique"};
+      break;
+    case !areNotEmpty(playersNames):
+      result = {code: -2, message: "Name(s) cannot be empty"};
+      break;
+    default:
+      result = {code: 0, message: "OK"};
+  }
+
+  return result;
+};
+
+const addPlayer = (name, symbol) => {
+  const id = genPlayerId();
+
+  playerList.push({id, name, symbol});
+  return true;
+};
+
+const setCurrentPlayer = (player) => currentPlayer = player;
 const getCurrentPlayer = () => currentPlayer;
 
 const getNumberCellsSelected = () => numberCellsSelected;
+const incrementCellsSelected = () => numberCellsSelected++;
 
-const checkWinner = () => {
-  const checkPlayers = (combination) => {
-    const unified = [...new Set(combination)];
+const checkPlayers = (combination) => {
+  const unified = [...new Set(combination)];
 
-    return (unified.length === 1 && unified[0] !== '') ? unified[0] : false;
-  };
+  return (unified.length === 1 && unified[0] !== '') ? unified[0] : false;
+};
 
+const checkWinner = (gameBoard) => {
   const diag1 = [];
   const diag2 = [];
 
@@ -24,6 +63,7 @@ const checkWinner = () => {
       winner = currentPlayer;
       return winner;
     }
+
     const col = [gameBoard[i], gameBoard[i + 3], gameBoard[i + 6]];
     if (checkPlayers(col)) {
       winner = currentPlayer;
@@ -42,48 +82,26 @@ const checkWinner = () => {
     winner = currentPlayer;
     return winner;
   }
-
+  
   return null;
 };
 
-const changePlayerTurn = () => {
-  currentPlayer = currentPlayer.id === 1 ? players[1] : players[0];
-  return currentPlayer;
-};
+const selectCell = (cellIdx, playerId) => gameBoard[cellIdx] = playerId;
 
-const selectCell = (cellIdx, currentPlayer) => {
-  gameBoard[cellIdx] = currentPlayer.symbol;
-  numberCellsSelected += 1;
-};
+const start = () => {
+  let result;
 
-const start = (users) => {
-  players = [...users];
-  [currentPlayer] = users;
-};
-
-const checkPlayersNames = ({ player1Name, player2Name }) => {
-  const messages = [];
-  let errCode = 0;
-
-  if (player1Name === '') {
-    messages.push({ input: 'player-one', msg: 'Please, enter valid name for player1' });
-    errCode = -1;
+  if (players.length === 2) {
+    [currentPlayer] = players;
+    result = {code: 0, message: 'OK' };
+  } else {
+    result = {code: -1, message: 'Players not set'};
   }
 
-  if (player2Name === '') {
-    messages.push({ input: 'player-two', msg: 'Please, enter valid name for player2' });
-    errCode = -1;
-  }
-
-  if (player1Name === player2Name && player1Name !== '') {
-    messages.push({ input: 'player-two', msg: 'Names must be unique' });
-    errCode = -1;
-  }
-
-  return { errCode, messages };
+  return result;
 };
 
 export {
-  start, checkPlayersNames, selectCell, changePlayerTurn,
+  start, validatePlayersNames, addPlayer, selectCell, setCurrentPlayer,
   checkWinner, getCurrentPlayer, getNumberCellsSelected,
 };
