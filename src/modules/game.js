@@ -7,12 +7,6 @@ let winner;
 const isUnique = (arr) => !([...new Set(arr)].length == 1);
 const areNotEmpty = (arr) => !arr.some(v => !!!v);
 
-function* generateId() {
-  let i = 1;
-  while(i < 3)
-  yield i++;
-}
-
 const getBoard = () => gameBoard;
 
 const getPlayers = () => players;
@@ -21,11 +15,11 @@ const validatePlayersNames = (playersNames) => {
   let result;
 
   switch(true) {
-    case !isUnique(playersNames):
-      result = {code: -1, message: "Names are not unique"};
-      break;
     case !areNotEmpty(playersNames):
       result = {code: -2, message: "Name(s) cannot be empty"};
+      break;
+    case !isUnique(playersNames):
+      result = {code: -1, message: "Names are not unique"};
       break;
     default:
       result = {code: 0, message: "OK"};
@@ -34,11 +28,14 @@ const validatePlayersNames = (playersNames) => {
   return result;
 };
 
-const addPlayer = (name, symbol) => {
-  const id = genPlayerId();
+const addPlayer = (id, name) => {
+  const symbol = id === 1 ? 'X' : 'O';
 
-  playerList.push({id, name, symbol});
-  return true;
+  players.push({id, name, symbol});
+};
+
+const addPlayers = (players) => {
+  players.forEach((player, idx) => addPlayer(idx, player));
 };
 
 const setCurrentPlayer = (player) => currentPlayer = player;
@@ -102,6 +99,6 @@ const start = () => {
 };
 
 export {
-  start, validatePlayersNames, addPlayer, selectCell, setCurrentPlayer,
+  start, validatePlayersNames, addPlayers, selectCell, setCurrentPlayer,
   checkWinner, getCurrentPlayer, getNumberCellsSelected,
 };
