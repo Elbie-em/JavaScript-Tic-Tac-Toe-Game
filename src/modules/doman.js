@@ -44,14 +44,12 @@ const displayError = (error) => {
   msgEl.innerHTML = '';
   const inputError = 'w-75 mx-auto form-control border border-danger';
 
-  for (let i = 0; i < error.messages.length; i += 1) {
-    const input = document.getElementById(error.messages[i].input);
-    input.className = inputError;
-    const li = document.createElement('li');
-    li.className = 'list-group-item border border-0';
-    li.innerHTML = error.messages[i].msg;
-    msgEl.appendChild(li);
-  }
+  let ul = document.createElement('ul');
+  const li = document.createElement('li');
+  li.className = 'list-group-item border border-0';
+  li.innerHTML = error.message;
+  ul.appendChild(li)
+  msgEl.appendChild(ul);
 
   const msgError = 'text-danger';
   msgEl.classList.add(msgError);
