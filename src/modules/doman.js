@@ -73,7 +73,7 @@ const getPlayersNames = () => {
   const player1Name = document.getElementById('player-one').value;
   const player2Name = document.getElementById('player-two').value;
 
-  return { player1Name, player2Name };
+  return [ player1Name, player2Name ];
 };
 
 const hidePlayersForm = () => {
