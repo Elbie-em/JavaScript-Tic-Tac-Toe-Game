@@ -45,39 +45,35 @@ const incrementCellsSelected = () => numberCellsSelected++;
 const checkPlayers = (combination) => {
   const unified = [...new Set(combination)];
 
-  return (unified.length === 1 && unified[0] !== '') ? unified[0] : false;
+  return (unified.length === 1 && (unified[0] || '') !== '') ? unified[0] : false;
 };
 
 const checkWinner = (gameBoard) => {
   const diag1 = [];
   const diag2 = [];
+  let player;
 
   for (let i = 0; i < 3; i += 1) {
     const row = gameBoard.slice(i * 3, i * 3 + 3);
-    if (checkPlayers(row)) {
-      winner = currentPlayer;
-      return winner;
-    }
+    player = checkPlayers(row);
+
+    if (player) return player;
 
     const col = [gameBoard[i], gameBoard[i + 3], gameBoard[i + 6]];
-    if (checkPlayers(col)) {
-      winner = currentPlayer;
-      return winner;
-    }
+    player = checkPlayers(col);
+
+    if (player) return player;
 
     diag1.push(gameBoard[i * 4]);
     diag2.push(gameBoard[i * 2 + 2]);
   }
 
-  if (checkPlayers(diag1)) {
-    winner = currentPlayer;
-    return winner;
-  }
-  if (checkPlayers(diag2)) {
-    winner = currentPlayer;
-    return winner;
-  }
-  
+  player = checkPlayers(diag1);
+  if (player) return winner;
+
+  player = checkPlayers(diag2);
+  if (player) return winner;
+
   return null;
 };
 
