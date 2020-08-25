@@ -9,8 +9,6 @@ const areNotEmpty = (arr) => !arr.some(v => !!!v);
 
 const getBoard = () => gameBoard;
 
-const getPlayers = () => players;
-
 const validatePlayersNames = (playersNames) => {
   let result;
 
