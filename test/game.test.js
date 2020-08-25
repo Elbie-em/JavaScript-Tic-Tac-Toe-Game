@@ -52,4 +52,44 @@ describe('Validation checks for check winner', () => {
   test('returns the id of player one when it is having a winning combination', () => {
     expect(Game.checkWinner(tieCombination)).toBeNull();
   });
-})
+});
+
+describe('Validation checks for currentPlayer turns', () => {
+  Game.addPlayers(['player1', 'player2']);
+  Game.start();
+
+  test('that currentPlayer is being set when the Game starts', () => {
+    expect(Game.getCurrentPlayer().id).toBe(1);
+  });
+
+  test('that currentPlayer changes with setCurrentPlayer', () => {
+    expect(Game.setCurrentPlayer().id).toBe(2);
+  });
+});
+
+describe('Validation checks for cell selection', () => {
+  test('the cell is being selected by its number by player 1', () => {
+    Game.selectCell(0, 1);
+    expect(Game.getBoard()).toEqual([1,,,,,,,,,]);
+  });
+
+  test('the cell is being selected by its number by player 2', () => {
+    Game.selectCell(0, 2);
+    expect(Game.getBoard()).toEqual([2,,,,,,,,,]);
+  });
+});
+
+describe("Validation check for getPlayerById", () => {
+  Game.addPlayers(['player1', 'player2']);
+  test('gets the player1 name with id 1', () => {
+    expect(Game.getPlayerById(1).name).toBe('player1');
+  });
+
+  test('gets the player2 name with id 2', () => {
+    expect(Game.getPlayerById(2).name).toBe('player2');
+  });
+
+  test('returns undefined result if player id does not exist', () => {
+    expect(Game.getPlayerById(3)).toBeUndefined();
+  });
+});
