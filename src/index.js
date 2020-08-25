@@ -1,17 +1,17 @@
 import * as Doman from './modules/doman.js';
 import * as Game from './modules/game.js';
-import Player from './modules/player.js';
 import './css/styles.css';
 
 const selectCell = (cellIdx) => {
-  const currentPlayer = Game.getCurrentPlayer();
-  Game.selectCell(cellIdx, currentPlayer);
-  Doman.updateCell(cellIdx, currentPlayer);
+  const CURRENT_PLAYER = Game.getCurrentPlayer();
+  Game.selectCell(cellIdx, CURRENT_PLAYER.id);
+  Doman.updateCell(cellIdx, CURRENT_PLAYER.symbol);
   Game.incrementCellsSelected();
-  const winner = Game.checkWinner(Game.getBoard());
+  const WINNER_ID = Game.checkWinner(Game.getBoard());
 
-  if (winner || Game.getNumberCellsSelected() === 9) {
-    Doman.showWinner(winner);
+  if (WINNER_ID || Game.getNumberCellsSelected() === 9) {
+    const WINNER = Game.getPlayerById(WINNER_ID);
+    Doman.showWinner(WINNER);
     Doman.disableButtons();
     Doman.hidePlayerTurn();
   } else {
