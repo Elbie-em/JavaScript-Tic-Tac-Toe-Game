@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "build": "webpack",
-    "watch": "jest"
+    "watch": "jest --watch"
   },
   "repository": {
     "type": "git",
