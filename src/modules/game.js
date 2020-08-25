@@ -33,10 +33,11 @@ const addPlayer = (id, name) => {
 };
 
 const addPlayers = (players) => {
-  players.forEach((player, idx) => addPlayer(idx, player));
+  players.forEach((player, idx) => addPlayer(idx + 1, player));
 };
 
-const setCurrentPlayer = () => currentPlayer = currentPlayer.id === 1? players[0] : players[1];
+const setCurrentPlayer = () => currentPlayer = currentPlayer.id === 1? players[1] : players[0];
+
 const getCurrentPlayer = () => currentPlayer;
 
 const getNumberCellsSelected = () => numberCellsSelected;
@@ -92,8 +93,12 @@ const start = () => {
   return result;
 };
 
+const getPlayerById = (id) => {
+  return players.filter(p => p.id === id)[0];
+};
+
 export {
   start, validatePlayersNames, addPlayers, selectCell, setCurrentPlayer,
   checkWinner, getCurrentPlayer, getNumberCellsSelected, getBoard,
-  incrementCellsSelected,
+  incrementCellsSelected, getPlayerById
 };
