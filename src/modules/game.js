@@ -1,11 +1,9 @@
+import { isUnique, areNotEmpty } from './array-functions';
 const gameBoard = new Array(9);
 let players = [];
 let currentPlayer;
 let numberCellsSelected = 0;
 let winner;
-
-const isUnique = (arr) => !([...new Set(arr)].length == 1);
-const areNotEmpty = (arr) => !arr.some(v => !!!v);
 
 const getBoard = () => gameBoard;
 
@@ -37,7 +35,6 @@ const addPlayers = (players) => {
 };
 
 const setCurrentPlayer = () => currentPlayer = currentPlayer.id === 1? players[1] : players[0];
-
 const getCurrentPlayer = () => currentPlayer;
 
 const getNumberCellsSelected = () => numberCellsSelected;
