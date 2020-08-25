@@ -15,4 +15,9 @@ describe('Validation checks for players names', () => {
     const players = ['',''];
     expect(Game.validatePlayersNames(players).message).toEqual("Name(s) cannot be empty");
   });
+
+  test('return error if player names are not unique', () => {
+    const players = ['exampleName','exampleName'];
+    expect(Game.validatePlayersNames(players).message).toEqual("Names are not unique");
+  });
 });
