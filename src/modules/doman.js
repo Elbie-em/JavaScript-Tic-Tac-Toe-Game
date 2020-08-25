@@ -42,13 +42,12 @@ const displayPlayerTurn = (currentPlayer) => {
 const displayError = (error) => {
   const msgEl = document.getElementById('messages');
   msgEl.innerHTML = '';
-  const inputError = 'w-75 mx-auto form-control border border-danger';
 
-  let ul = document.createElement('ul');
+  const ul = document.createElement('ul');
   const li = document.createElement('li');
   li.className = 'list-group-item border border-0';
   li.innerHTML = error.message;
-  ul.appendChild(li)
+  ul.appendChild(li);
   msgEl.appendChild(ul);
 
   const msgError = 'text-danger';
@@ -71,7 +70,7 @@ const getPlayersNames = () => {
   const player1Name = document.getElementById('player-one').value;
   const player2Name = document.getElementById('player-two').value;
 
-  return [ player1Name, player2Name ];
+  return [player1Name, player2Name];
 };
 
 const hidePlayersForm = () => {

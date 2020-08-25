@@ -1,5 +1,5 @@
-import * as Doman from './modules/doman.js';
-import * as Game from './modules/game.js';
+import * as Doman from './modules/doman';
+import * as Game from './modules/game';
 import './css/styles.css';
 
 const selectCell = (cellIdx) => {
@@ -23,7 +23,7 @@ const selectCell = (cellIdx) => {
 const initGame = () => {
   const playersNames = Doman.getPlayersNames();
 
-  let validNames = Game.validatePlayersNames(playersNames);
+  const validNames = Game.validatePlayersNames(playersNames);
 
   if (validNames.code === 0) {
     Game.addPlayers(playersNames);
