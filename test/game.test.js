@@ -26,3 +26,30 @@ describe('Validation checks for players names', () => {
     expect(Game.validatePlayersNames(players).message).toEqual("OK");
   });
 });
+
+describe('Validation checks for cell selection counter', () => {
+  test('increments the number of cells selected', () => {
+    Game.incrementCellsSelected();
+    expect(Game.getNumberCellsSelected()).toBe(1);
+  });
+});
+
+describe('Validation checks for check winner', () => {
+  const player1WinCombination = [1, 1, 1, 2, 2, , , , ];
+
+  test('returns the id of player one when it is having a winning combination', () => {
+    expect(Game.checkWinner(player1WinCombination)).toEqual(1);
+  });
+
+  const player2WinCombination = [1, 1, ,2, 2, 2, , , ];
+
+  test('returns the id of player one when it is having a winning combination', () => {
+    expect(Game.checkWinner(player2WinCombination)).toEqual(2);
+  });
+
+  const tieCombination = [1, 1, 2, 2, 2, 1, 1, 1, 2];
+
+  test('returns the id of player one when it is having a winning combination', () => {
+    expect(Game.checkWinner(tieCombination)).toBeNull();
+  });
+})
