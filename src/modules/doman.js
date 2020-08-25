@@ -79,9 +79,9 @@ const hidePlayersForm = () => {
   playersForm.hidden = true;
 };
 
-const updateCell = (cellIdx, player) => {
+const updateCell = (cellIdx, symbol) => {
   const cell = document.getElementById(`pos${cellIdx}`);
-  cell.innerHTML = player.symbol;
+  cell.innerHTML = symbol;
   cell.disabled = true;
 };
 
