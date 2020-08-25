@@ -20,4 +20,9 @@ describe('Validation checks for players names', () => {
     const players = ['exampleName','exampleName'];
     expect(Game.validatePlayersNames(players).message).toEqual("Names are not unique");
   });
+
+  test('return a successful message then proceed to game play', () => {
+    const players = ['exampleNameI','exampleNameII'];
+    expect(Game.validatePlayersNames(players).message).toEqual("OK");
+  });
 });
