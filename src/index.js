@@ -7,14 +7,15 @@ const selectCell = (cellIdx) => {
   const currentPlayer = Game.getCurrentPlayer();
   Game.selectCell(cellIdx, currentPlayer);
   Doman.updateCell(cellIdx, currentPlayer);
-  const winner = Game.checkWinner();
+  Game.incrementCellsSelected();
+  const winner = Game.checkWinner(Game.getBoard());
 
   if (winner || Game.getNumberCellsSelected() === 9) {
     Doman.showWinner(winner);
     Doman.disableButtons();
     Doman.hidePlayerTurn();
   } else {
-    Game.changePlayerTurn();
+    Game.setCurrentPlayer();
     Doman.displayPlayerTurn(Game.getCurrentPlayer());
   }
 };
