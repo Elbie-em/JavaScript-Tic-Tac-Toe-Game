@@ -38,7 +38,7 @@ const addPlayers = (players) => {
   players.forEach((player, idx) => addPlayer(idx, player));
 };
 
-const setCurrentPlayer = (player) => currentPlayer = player;
+const setCurrentPlayer = () => currentPlayer = currentPlayer.id === 1? players[0] : players[1];
 const getCurrentPlayer = () => currentPlayer;
 
 const getNumberCellsSelected = () => numberCellsSelected;
@@ -100,5 +100,6 @@ const start = () => {
 
 export {
   start, validatePlayersNames, addPlayers, selectCell, setCurrentPlayer,
-  checkWinner, getCurrentPlayer, getNumberCellsSelected,
+  checkWinner, getCurrentPlayer, getNumberCellsSelected, getBoard,
+  incrementCellsSelected,
 };
