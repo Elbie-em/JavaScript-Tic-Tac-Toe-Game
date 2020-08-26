@@ -55,7 +55,7 @@ Go to the root folder of the project and open the index.html file in your browse
 To run the tests:
 
 ```
-npx jest --watch
+npm run test
 ```
 
 ## Authors
