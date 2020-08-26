@@ -40,9 +40,23 @@ From the command line/terminal clone the repository:
 
     $ git clone https://github.com/Elbie-em/JavaScript-Tic-Tac-Toe-Game.git
 
+Install npm packages:
+
+```
+npm i
+```
+
 ### Start Playing
 
 Go to the root folder of the project and open the index.html file in your browser:
+
+### Testing
+
+To run the tests:
+
+```
+npm run test
+```
 
 ## Authors
 
